@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { ThemeProvider } from 'styled-components'
+
+import { defaultTheme } from './styles/themes/default'
 
 export function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div>
-      hello world
-    </div>
+    <ThemeProvider theme={defaultTheme} >
+      Hello world
+    </ThemeProvider>
   )
 }

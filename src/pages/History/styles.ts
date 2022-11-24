@@ -1,5 +1,15 @@
 import styled from 'styled-components'
 
+const STATUS_COLORS = {
+  yellow: 'yellow-500',
+  red: 'red-500',
+  green: 'green-500',
+} as const
+
+interface StatusProps {
+  statusColor: keyof typeof STATUS_COLORS
+}
+
 export const HistoryContainer = styled.main`
   flex: 1;
 
@@ -66,5 +76,22 @@ export const HistoryList = styled.main`
         padding-right: 1.5rem;
       }
     }
+  }
+`
+
+export const Status = styled.span<StatusProps>`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+
+    border-radius: 50%;
+
+    background-color: ${(props) =>
+      props.theme[STATUS_COLORS[props.statusColor]]};
   }
 `

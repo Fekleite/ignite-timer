@@ -59,7 +59,7 @@ export function CyclesContextProvider({
       id,
       task: data.task,
       minutesAmount: data.minutesAmount,
-      startData: new Date(),
+      startDate: new Date(),
     }
 
     setCycles((oldState) => [...oldState, newCycle])

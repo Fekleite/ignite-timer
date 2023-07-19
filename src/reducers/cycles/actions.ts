@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Cycle } from '../../@types/cycles'
+import { Cycle } from './reducer'
 
 export enum ActionTypes {
   ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',

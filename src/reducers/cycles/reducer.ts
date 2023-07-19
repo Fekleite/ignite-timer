@@ -1,7 +1,15 @@
 import { produce } from 'immer'
 
-import { Cycle } from '../../@types/cycles'
 import { ActionTypes } from './actions'
+
+export interface Cycle {
+  id: string
+  task: string
+  minutesAmount: number
+  startDate: Date
+  interruptedDate?: Date
+  finishedDate?: Date
+}
 
 interface CyclesState {
   cycles: Cycle[]
@@ -15,7 +23,6 @@ export function cyclesReducer(state: CyclesState, action: any) {
         draft.cycles.push(action.payload.newCycle)
         draft.activeCycleId = action.payload.newCycle.id
       })
-
     case ActionTypes.INTERRUPT_CURRENT_CYCLE: {
       const currentCycleIndex = state.cycles.findIndex((cycle) => {
         return cycle.id === state.activeCycleId
@@ -26,11 +33,10 @@ export function cyclesReducer(state: CyclesState, action: any) {
       }
 
       return produce(state, (draft) => {
-        draft.cycles[currentCycleIndex].interruptedDate = new Date()
         draft.activeCycleId = null
+        draft.cycles[currentCycleIndex].interruptedDate = new Date()
       })
     }
-
     case ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED: {
       const currentCycleIndex = state.cycles.findIndex((cycle) => {
         return cycle.id === state.activeCycleId
@@ -41,11 +47,10 @@ export function cyclesReducer(state: CyclesState, action: any) {
       }
 
       return produce(state, (draft) => {
-        draft.cycles[currentCycleIndex].finishedDate = new Date()
         draft.activeCycleId = null
+        draft.cycles[currentCycleIndex].finishedDate = new Date()
       })
     }
-
     default:
       return state
   }
